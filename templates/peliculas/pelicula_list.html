@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Catálogo - CineApp{% endblock %}
+
+{% block content %}
+<h2>Catálogo de Películas</h2>
+
+{% if peliculas %}
+<ul>
+    {% for pelicula in peliculas %}
+    <li>
+        <a href="{% url 'pelicula_detail' pelicula.pk %}">
+            <strong>{{ pelicula.titulo }}</strong>
+        </a>
+        ({{ pelicula.anio }})
+        — Dirigida por {{ pelicula.director }}
+        — Añadida por {{ pelicula.autor.username }}
+    </li>
+    {% endfor %}
+</ul>
+
+{% if is_paginated %}
+<nav>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">← Anterior</a>
+    {% endif %}
+    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente →</a>
+    {% endif %}
+</nav>
+{% endif %}
+
+{% else %}
+<p>Aún no hay películas en el catálogo.</p>
+{% endif %}
+
+{% endblock %}

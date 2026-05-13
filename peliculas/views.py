@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+from .models import Pelicula
+
+
+class PeliculaListView(ListView):
+    model = Pelicula
+    template_name = 'peliculas/pelicula_list.html'
+    context_object_name = 'peliculas'
+    paginate_by = 8
