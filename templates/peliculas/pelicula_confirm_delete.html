@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar película - CineApp{% endblock %}
+
+{% block content %}
+<div class="tarjeta-formulario tarjeta-peligro">
+    <div class="tarjeta-cabecera tarjeta-cabecera-peligro">
+        <h2>⚠ Confirmar eliminación</h2>
+    </div>
+    <div class="tarjeta-cuerpo">
+        <p class="texto-grande">
+            ¿Estás seguro de que deseas eliminar la película
+            <strong>"{{ object.titulo }}"</strong>?
+        </p>
+        <div class="aviso aviso-aviso">
+            ℹ Esta acción no se puede deshacer.
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="acciones acciones-formulario">
+                <a href="{% url 'pelicula_detail' object.pk %}" class="boton boton-secundario">← Cancelar</a>
+                <button type="submit" class="boton boton-peligro">🗑 Eliminar definitivamente</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

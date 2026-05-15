@@ -1,4 +1,7 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView, DetailView, CreateView, UpdateView, DeleteView
+)
 
 from .models import Pelicula
 from .forms import PeliculaForm
@@ -31,3 +34,21 @@ class PeliculaCreateView(CreateView):
         context['accion'] = 'Añadir nueva película'
         context['boton'] = 'Crear'
         return context
+
+
+class PeliculaUpdateView(UpdateView):
+    model = Pelicula
+    form_class = PeliculaForm
+    template_name = 'peliculas/pelicula_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['accion'] = f'Editar: {self.object.titulo}'
+        context['boton'] = 'Guardar cambios'
+        return context
+
+
+class PeliculaDeleteView(DeleteView):
+    model = Pelicula
+    template_name = 'peliculas/pelicula_confirm_delete.html'
+    success_url = reverse_lazy('pelicula_list')
