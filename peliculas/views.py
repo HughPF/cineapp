@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 )
@@ -21,7 +22,7 @@ class PeliculaDetailView(DetailView):
     context_object_name = 'pelicula'
 
 
-class PeliculaCreateView(CreateView):
+class PeliculaCreateView(LoginRequiredMixin, CreateView):
     model = Pelicula
     form_class = PeliculaForm
     template_name = 'peliculas/pelicula_form.html'
@@ -37,7 +38,7 @@ class PeliculaCreateView(CreateView):
         return context
 
 
-class PeliculaUpdateView(UpdateView):
+class PeliculaUpdateView(LoginRequiredMixin, UpdateView):
     model = Pelicula
     form_class = PeliculaForm
     template_name = 'peliculas/pelicula_form.html'
@@ -49,7 +50,7 @@ class PeliculaUpdateView(UpdateView):
         return context
 
 
-class PeliculaDeleteView(DeleteView):
+class PeliculaDeleteView(LoginRequiredMixin, DeleteView):
     model = Pelicula
     template_name = 'peliculas/pelicula_confirm_delete.html'
     success_url = reverse_lazy('pelicula_list')
