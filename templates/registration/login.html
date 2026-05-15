@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Iniciar sesión - CineApp{% endblock %}
+
+{% block content %}
+<div class="tarjeta-formulario tarjeta-estrecha">
+    <div class="tarjeta-cabecera">
+        <h2>🔐 Iniciar sesión</h2>
+    </div>
+    <div class="tarjeta-cuerpo">
+        {% if form.errors %}
+            <div class="aviso aviso-error">
+                Usuario o contraseña incorrectos. Inténtalo de nuevo.
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="campo-grupo">
+                <label for="id_username" class="etiqueta-campo">Usuario</label>
+                <input type="text" name="username" id="id_username" class="campo" required autofocus>
+            </div>
+            <div class="campo-grupo">
+                <label for="id_password" class="etiqueta-campo">Contraseña</label>
+                <input type="password" name="password" id="id_password" class="campo" required>
+            </div>
+            <button type="submit" class="boton boton-primario boton-ancho">Entrar</button>
+        </form>
+        <hr class="separador">
+        <p class="texto-centrado">
+            ¿No tienes cuenta?
+            <a href="{% url 'registro' %}">Regístrate aquí</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
