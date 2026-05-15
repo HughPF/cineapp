@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ accion }} - CineApp{% endblock %}
+
+{% block content %}
+<h2>{{ accion }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">{{ boton }}</button>
+    <a href="{% url 'pelicula_list' %}">Cancelar</a>
+</form>
+{% endblock %}
