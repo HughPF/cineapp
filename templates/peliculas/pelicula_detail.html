@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ pelicula.titulo }} - CineApp{% endblock %}
+
+{% block content %}
+<article>
+    <h1>{{ pelicula.titulo }}</h1>
+    <p>
+        <strong>Año:</strong> {{ pelicula.anio }}
+        | <strong>Duración:</strong> {{ pelicula.duracion }} min
+        {% if pelicula.genero %}
+            | <strong>Género:</strong> {{ pelicula.genero.nombre }}
+        {% endif %}
+    </p>
+    <h3>Director/a</h3>
+    <p>{{ pelicula.director }}</p>
+
+    <h3>Sinopsis</h3>
+    <p>{{ pelicula.sinopsis|linebreaks }}</p>
+
+    <hr>
+    <p>
+        <small>
+            Añadida por <strong>{{ pelicula.autor.username }}</strong>
+            el {{ pelicula.fecha_creacion|date:"d/m/Y H:i" }}
+        </small>
+    </p>
+
+    <p>
+        <a href="{% url 'pelicula_list' %}">← Volver al catálogo</a>
+    </p>
+</article>
+{% endblock %}
