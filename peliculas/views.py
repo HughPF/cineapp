@@ -1,12 +1,21 @@
 from django.urls import reverse_lazy
 from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 )
 
 from .models import Pelicula
 from .forms import PeliculaForm, RegistroForm
+
+
+class StaffOrAuthorMixin(UserPassesTestMixin):
+    """Permite acceso al autor del objeto o a usuarios staff/superuser."""
+
+    def test_func(self):
+        obj = self.get_object()
+        user = self.request.user
+        return user.is_staff or user.is_superuser or obj.autor == user
 
 
 class PeliculaListView(ListView):
@@ -38,7 +47,7 @@ class PeliculaCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class PeliculaUpdateView(LoginRequiredMixin, UpdateView):
+class PeliculaUpdateView(LoginRequiredMixin, StaffOrAuthorMixin, UpdateView):
     model = Pelicula
     form_class = PeliculaForm
     template_name = 'peliculas/pelicula_form.html'
@@ -50,7 +59,7 @@ class PeliculaUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 
-class PeliculaDeleteView(LoginRequiredMixin, DeleteView):
+class PeliculaDeleteView(LoginRequiredMixin, StaffOrAuthorMixin, DeleteView):
     model = Pelicula
     template_name = 'peliculas/pelicula_confirm_delete.html'
     success_url = reverse_lazy('pelicula_list')
