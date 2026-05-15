@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro - CineApp{% endblock %}
+
+{% block content %}
+<div class="tarjeta-formulario tarjeta-estrecha">
+    <div class="tarjeta-cabecera tarjeta-cabecera-exito">
+        <h2>👤 Crear cuenta</h2>
+    </div>
+    <div class="tarjeta-cuerpo">
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="aviso aviso-error">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="campo-grupo">
+                    <label for="{{ field.id_for_label }}" class="etiqueta-campo">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="ayuda">{{ field.help_text|safe }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                        <small class="error">{{ field.errors }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="boton boton-exito boton-ancho">Registrarse</button>
+        </form>
+        <hr class="separador">
+        <p class="texto-centrado">
+            ¿Ya tienes cuenta?
+            <a href="{% url 'login' %}">Inicia sesión</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

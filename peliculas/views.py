@@ -1,10 +1,11 @@
 from django.urls import reverse_lazy
+from django.contrib.auth import login
 from django.views.generic import (
-    ListView, DetailView, CreateView, UpdateView, DeleteView
+    ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 )
 
 from .models import Pelicula
-from .forms import PeliculaForm
+from .forms import PeliculaForm, RegistroForm
 
 
 class PeliculaListView(ListView):
@@ -52,3 +53,14 @@ class PeliculaDeleteView(DeleteView):
     model = Pelicula
     template_name = 'peliculas/pelicula_confirm_delete.html'
     success_url = reverse_lazy('pelicula_list')
+
+
+class RegistroView(FormView):
+    template_name = 'registration/registro.html'
+    form_class = RegistroForm
+    success_url = reverse_lazy('pelicula_list')
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return super().form_valid(form)
