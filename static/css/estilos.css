@@ -1,0 +1,492 @@
+/* ===================================================================
+   CineApp - Hoja de estilos personalizada
+   Proyecto PEP 2DAW - Curso 2025/2026
+   =================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-fondo: #f4f5f7;
+    --color-texto: #1f2937;
+    --color-primario: #2563eb;
+    --color-primario-oscuro: #1d4ed8;
+    --color-acento: #f59e0b;
+    --color-acento-oscuro: #d97706;
+    --color-exito: #16a34a;
+    --color-exito-oscuro: #15803d;
+    --color-aviso: #f59e0b;
+    --color-peligro: #dc2626;
+    --color-peligro-oscuro: #b91c1c;
+    --color-secundario: #6b7280;
+    --color-cabecera: #111827;
+    --color-tarjeta: #ffffff;
+    --color-borde: #e5e7eb;
+    --sombra: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --sombra-fuerte: 0 6px 16px rgba(0, 0, 0, 0.12);
+    --radio: 8px;
+    --transicion: 0.2s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--color-texto);
+    background: var(--color-fondo);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--color-primario);
+    text-decoration: none;
+    transition: color var(--transicion);
+}
+
+a:hover {
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+hr.separador {
+    border: 0;
+    border-top: 1px solid var(--color-borde);
+    margin: 1.2rem 0;
+}
+
+/* --- Layout general --- */
+.contenedor {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.contenido-principal {
+    flex: 1;
+    padding: 2rem 1rem;
+}
+
+/* --- Cabecera / navegación --- */
+.cabecera {
+    background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+    color: white;
+    padding: 0.9rem 0;
+    box-shadow: var(--sombra);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.cabecera-contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.logo:hover {
+    color: var(--color-acento);
+    text-decoration: none;
+}
+
+.nav-principal {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-enlace {
+    color: #e5e7eb;
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--radio);
+    text-decoration: none;
+    transition: background var(--transicion);
+}
+
+.nav-enlace:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+}
+
+.nav-usuario {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+}
+
+.saludo {
+    color: #d1d5db;
+    font-size: 0.95rem;
+}
+
+.form-inline {
+    display: inline;
+}
+
+/* --- Botones --- */
+.boton {
+    display: inline-block;
+    padding: 0.55rem 1.1rem;
+    border: none;
+    border-radius: var(--radio);
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transicion);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.boton:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--sombra);
+    text-decoration: none;
+}
+
+.boton-primario { background: var(--color-primario); color: white; }
+.boton-primario:hover { background: var(--color-primario-oscuro); color: white; }
+
+.boton-secundario { background: var(--color-secundario); color: white; }
+.boton-secundario:hover { background: #4b5563; color: white; }
+
+.boton-acento { background: var(--color-acento); color: var(--color-cabecera); }
+.boton-acento:hover { background: var(--color-acento-oscuro); color: white; }
+
+.boton-exito { background: var(--color-exito); color: white; }
+.boton-exito:hover { background: var(--color-exito-oscuro); color: white; }
+
+.boton-aviso { background: var(--color-aviso); color: white; }
+.boton-aviso:hover { background: var(--color-acento-oscuro); color: white; }
+
+.boton-peligro { background: var(--color-peligro); color: white; }
+.boton-peligro:hover { background: var(--color-peligro-oscuro); color: white; }
+
+.boton-pequeno { padding: 0.35rem 0.8rem; font-size: 0.85rem; }
+.boton-ancho { display: block; width: 100%; }
+
+/* --- Etiquetas / badges --- */
+.etiqueta {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: var(--color-borde);
+    color: var(--color-texto);
+}
+
+.etiqueta-genero { background: #e0f2fe; color: #0369a1; }
+.etiqueta-anio { background: #dbeafe; color: #1e40af; }
+.etiqueta-duracion { background: #dcfce7; color: #166534; }
+.etiqueta-staff { background: var(--color-acento); color: var(--color-cabecera); }
+
+/* --- Cabecera de página (hero) --- */
+.cabecera-pagina {
+    text-align: center;
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    color: white;
+    padding: 2.5rem 1rem;
+    border-radius: var(--radio);
+    margin-bottom: 2rem;
+    box-shadow: var(--sombra);
+}
+
+.titulo-pagina { font-size: 2.3rem; margin-bottom: 0.5rem; }
+.subtitulo-pagina { font-size: 1.1rem; opacity: 0.95; }
+
+/* --- Mensajes --- */
+.zona-mensajes { margin-top: 1rem; }
+
+.mensaje {
+    padding: 0.9rem 1rem;
+    border-radius: var(--radio);
+    margin-bottom: 0.8rem;
+    border-left: 4px solid;
+    background: var(--color-tarjeta);
+    box-shadow: var(--sombra);
+}
+
+.mensaje-success { border-left-color: var(--color-exito); background: #f0fdf4; color: #14532d; }
+.mensaje-error, .mensaje-danger { border-left-color: var(--color-peligro); background: #fef2f2; color: #7f1d1d; }
+.mensaje-warning { border-left-color: var(--color-aviso); background: #fffbeb; color: #78350f; }
+.mensaje-info { border-left-color: var(--color-primario); background: #eff6ff; color: #1e3a8a; }
+
+/* --- Formularios --- */
+.formulario-busqueda {
+    background: var(--color-tarjeta);
+    padding: 1.2rem;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 1rem;
+    align-items: end;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.campo-grupo-botones {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.etiqueta-campo {
+    font-weight: 600;
+    color: var(--color-texto);
+    font-size: 0.95rem;
+}
+
+.obligatorio { color: var(--color-peligro); margin-left: 2px; }
+
+.campo {
+    width: 100%;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    font-size: 1rem;
+    font-family: inherit;
+    background: white;
+    transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+.campo:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+textarea.campo { resize: vertical; min-height: 80px; }
+
+.ayuda { color: var(--color-secundario); font-size: 0.85rem; margin-top: 0.2rem; }
+.error { color: var(--color-peligro); font-size: 0.85rem; margin-top: 0.2rem; }
+.enlace-limpiar { color: var(--color-secundario); font-size: 0.9rem; }
+
+/* --- Tarjetas formulario --- */
+.tarjeta-formulario {
+    background: var(--color-tarjeta);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-fuerte);
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.tarjeta-estrecha { max-width: 480px; }
+.tarjeta-peligro { border: 1px solid var(--color-peligro); }
+
+.tarjeta-cabecera {
+    background: var(--color-primario);
+    color: white;
+    padding: 1.1rem 1.3rem;
+}
+
+.tarjeta-cabecera-exito { background: var(--color-exito); }
+.tarjeta-cabecera-peligro { background: var(--color-peligro); }
+
+.tarjeta-cuerpo { padding: 1.5rem; }
+
+.acciones {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.acciones-formulario {
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+/* --- Parrilla de películas --- */
+.parrilla-peliculas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.tarjeta-pelicula {
+    background: var(--color-tarjeta);
+    border-radius: var(--radio);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    transition: transform var(--transicion), box-shadow var(--transicion);
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta-pelicula:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-fuerte);
+}
+
+.cartel {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    background: #d1d5db;
+}
+
+.cartel-vacio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6b7280 0%, #374151 100%);
+    color: white;
+    font-size: 4rem;
+}
+
+.tarjeta-pelicula .tarjeta-cuerpo {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta-titulo {
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+    color: var(--color-texto);
+}
+
+.tarjeta-meta { color: var(--color-secundario); font-size: 0.88rem; margin-bottom: 0.5rem; }
+.tarjeta-director { font-size: 0.92rem; margin-bottom: 0.5rem; }
+.tarjeta-sinopsis { font-size: 0.9rem; color: #4b5563; flex: 1; margin-bottom: 0.8rem; }
+
+.tarjeta-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--color-borde);
+    margin-top: auto;
+}
+
+.autor { color: var(--color-secundario); font-size: 0.85rem; }
+
+/* --- Detalle de película --- */
+.detalle-pelicula {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 2rem;
+    background: var(--color-tarjeta);
+    padding: 2rem;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+.cartel-grande {
+    width: 100%;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+.detalle-titulo {
+    font-size: 2rem;
+    margin-bottom: 0.7rem;
+    color: var(--color-cabecera);
+}
+
+.detalle-etiquetas {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.detalle-etiquetas .etiqueta { font-size: 0.95rem; padding: 0.3rem 0.8rem; }
+
+.detalle-seccion {
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+    color: var(--color-primario);
+    font-size: 1.1rem;
+}
+
+.detalle-sinopsis { text-align: justify; }
+
+.metadatos {
+    color: var(--color-secundario);
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1rem;
+}
+
+/* --- Paginación --- */
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.paginacion-info { font-weight: 600; color: var(--color-secundario); }
+
+/* --- Avisos --- */
+.aviso {
+    padding: 1rem 1.2rem;
+    border-radius: var(--radio);
+    margin-bottom: 1rem;
+    border-left: 4px solid;
+}
+
+.aviso-info { background: #eff6ff; border-left-color: var(--color-primario); color: #1e3a8a; text-align: center; }
+.aviso-error { background: #fef2f2; border-left-color: var(--color-peligro); color: #7f1d1d; }
+.aviso-aviso { background: #fffbeb; border-left-color: var(--color-aviso); color: #78350f; }
+
+.texto-centrado { text-align: center; }
+.texto-grande { font-size: 1.1rem; }
+
+/* --- Pie de página --- */
+.pie-pagina {
+    background: var(--color-cabecera);
+    color: #d1d5db;
+    text-align: center;
+    padding: 1.2rem 0;
+    margin-top: 3rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .detalle-pelicula { grid-template-columns: 1fr; }
+    .detalle-cartel { max-width: 280px; margin: 0 auto; }
+    .formulario-busqueda { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .titulo-pagina { font-size: 1.6rem; }
+    .cabecera-contenido { flex-direction: column; align-items: stretch; }
+    .nav-principal, .nav-usuario { justify-content: center; }
+    .parrilla-peliculas { grid-template-columns: 1fr; }
+    .cartel { height: 280px; }
+}

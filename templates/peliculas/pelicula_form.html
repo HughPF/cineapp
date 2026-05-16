@@ -3,13 +3,39 @@
 {% block title %}{{ accion }} - CineApp{% endblock %}
 
 {% block content %}
-<h2>{{ accion }}</h2>
+<div class="tarjeta-formulario">
+    <div class="tarjeta-cabecera">
+        <h2>🎬 {{ accion }}</h2>
+    </div>
+    <div class="tarjeta-cuerpo">
+        <form method="post">
+            {% csrf_token %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+            {% if form.non_field_errors %}
+                <div class="aviso aviso-error">{{ form.non_field_errors }}</div>
+            {% endif %}
 
-    <button type="submit">{{ boton }}</button>
-    <a href="{% url 'pelicula_list' %}">Cancelar</a>
-</form>
+            {% for field in form %}
+                <div class="campo-grupo">
+                    <label for="{{ field.id_for_label }}" class="etiqueta-campo">
+                        {{ field.label }}
+                        {% if field.field.required %}<span class="obligatorio">*</span>{% endif %}
+                    </label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="ayuda">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                        <small class="error">{{ field.errors }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="acciones acciones-formulario">
+                <a href="{% url 'pelicula_list' %}" class="boton boton-secundario">Cancelar</a>
+                <button type="submit" class="boton boton-exito">{{ boton }}</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
