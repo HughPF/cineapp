@@ -11,6 +11,16 @@
         <h1>🎬 CineApp</h1>
     </header>
 
+    {% if messages %}
+    <div class="zona-mensajes">
+        {% for message in messages %}
+        <div class="mensaje mensaje-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <main>
         {% block content %}{% endblock %}
     </main>
