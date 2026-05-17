@@ -4,11 +4,12 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.db.models import Q
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 )
 
-from .models import Pelicula
+from .models import Pelicula, Genero
 from .forms import PeliculaForm, RegistroForm
 
 
@@ -35,6 +36,28 @@ class PeliculaListView(ListView):
     template_name = 'peliculas/pelicula_list.html'
     context_object_name = 'peliculas'
     paginate_by = 8
+
+    def get_queryset(self):
+        queryset = Pelicula.objects.select_related('genero', 'autor').all()
+        query = self.request.GET.get('q', '').strip()
+        genero_id = self.request.GET.get('genero', '').strip()
+
+        if query:
+            queryset = queryset.filter(
+                Q(titulo__icontains=query) |
+                Q(director__icontains=query) |
+                Q(sinopsis__icontains=query)
+            )
+        if genero_id.isdigit():
+            queryset = queryset.filter(genero_id=int(genero_id))
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['generos'] = Genero.objects.all()
+        context['query'] = self.request.GET.get('q', '')
+        context['genero_seleccionado'] = self.request.GET.get('genero', '')
+        return context
 
 
 class PeliculaDetailView(DetailView):

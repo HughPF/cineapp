@@ -3,36 +3,86 @@
 {% block title %}Catálogo - CineApp{% endblock %}
 
 {% block content %}
-<h2>Catálogo de Películas</h2>
+<section class="cabecera-pagina">
+    <h1 class="titulo-pagina">🎬 Catálogo de Películas</h1>
+    <p class="subtitulo-pagina">Descubre y comparte las mejores películas</p>
+</section>
+
+<form method="get" class="formulario-busqueda">
+    <div class="campo-grupo">
+        <label class="etiqueta-campo" for="q">Buscar</label>
+        <input type="text" name="q" id="q" class="campo"
+               value="{{ query }}"
+               placeholder="Título, director o sinopsis...">
+    </div>
+    <div class="campo-grupo">
+        <label class="etiqueta-campo" for="genero">Género</label>
+        <select name="genero" id="genero" class="campo">
+            <option value="">-- Todos los géneros --</option>
+            {% for g in generos %}
+                <option value="{{ g.pk }}" {% if genero_seleccionado == g.pk|stringformat:"s" %}selected{% endif %}>
+                    {{ g.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="campo-grupo campo-grupo-botones">
+        <button type="submit" class="boton boton-primario">🔍 Filtrar</button>
+        {% if query or genero_seleccionado %}
+            <a href="{% url 'pelicula_list' %}" class="enlace-limpiar">Limpiar</a>
+        {% endif %}
+    </div>
+</form>
 
 {% if peliculas %}
-<ul>
+<div class="parrilla-peliculas">
     {% for pelicula in peliculas %}
-    <li>
-        <a href="{% url 'pelicula_detail' pelicula.pk %}">
-            <strong>{{ pelicula.titulo }}</strong>
-        </a>
-        ({{ pelicula.anio }})
-        — Dirigida por {{ pelicula.director }}
-        — Añadida por {{ pelicula.autor.username }}
-    </li>
+    <article class="tarjeta-pelicula">
+        <div class="tarjeta-cuerpo">
+            <h3 class="tarjeta-titulo">{{ pelicula.titulo }}</h3>
+            <p class="tarjeta-meta">
+                📅 {{ pelicula.anio }}
+                {% if pelicula.genero %}
+                    · <span class="etiqueta etiqueta-genero">{{ pelicula.genero.nombre }}</span>
+                {% endif %}
+            </p>
+            <p class="tarjeta-director">🎬 <strong>{{ pelicula.director }}</strong></p>
+            <p class="tarjeta-sinopsis">{{ pelicula.sinopsis|truncatewords:18 }}</p>
+            <div class="tarjeta-pie">
+                <small class="autor">👤 {{ pelicula.autor.username }}</small>
+                <a href="{% url 'pelicula_detail' pelicula.pk %}" class="boton boton-primario boton-pequeno">Ver más →</a>
+            </div>
+        </div>
+    </article>
     {% endfor %}
-</ul>
+</div>
 
 {% if is_paginated %}
-<nav>
+<nav class="paginacion">
     {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">← Anterior</a>
+        <a class="boton boton-secundario" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if genero_seleccionado %}&genero={{ genero_seleccionado }}{% endif %}">← Anterior</a>
     {% endif %}
-    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+    <span class="paginacion-info">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
     {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">Siguiente →</a>
+        <a class="boton boton-secundario" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if genero_seleccionado %}&genero={{ genero_seleccionado }}{% endif %}">Siguiente →</a>
     {% endif %}
 </nav>
 {% endif %}
 
 {% else %}
-<p>Aún no hay películas en el catálogo.</p>
+<div class="aviso aviso-info">
+    {% if query or genero_seleccionado %}
+        No se han encontrado películas con esos criterios.
+        <a href="{% url 'pelicula_list' %}">Ver todas</a>.
+    {% else %}
+        Aún no hay películas en el catálogo.
+        {% if user.is_authenticated %}
+            <a href="{% url 'pelicula_create' %}">¡Añade la primera!</a>
+        {% else %}
+            <a href="{% url 'login' %}">Inicia sesión</a> para añadir la primera.
+        {% endif %}
+    {% endif %}
+</div>
 {% endif %}
 
 {% endblock %}
