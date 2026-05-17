@@ -7,7 +7,7 @@ from .models import Pelicula
 class PeliculaForm(forms.ModelForm):
     class Meta:
         model = Pelicula
-        fields = ['titulo', 'director', 'sinopsis', 'anio', 'duracion', 'genero']
+        fields = ['titulo', 'director', 'sinopsis', 'anio', 'duracion', 'genero', 'cartel']
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'campo', 'placeholder': 'Título de la película'}),
             'director': forms.TextInput(attrs={'class': 'campo', 'placeholder': 'Director/a'}),
@@ -15,6 +15,7 @@ class PeliculaForm(forms.ModelForm):
             'anio': forms.NumberInput(attrs={'class': 'campo', 'min': 1888, 'max': 2100}),
             'duracion': forms.NumberInput(attrs={'class': 'campo', 'min': 1}),
             'genero': forms.Select(attrs={'class': 'campo'}),
+            'cartel': forms.ClearableFileInput(attrs={'class': 'campo'}),
         }
 
 

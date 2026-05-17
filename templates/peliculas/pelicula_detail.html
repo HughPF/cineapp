@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ pelicula.titulo }} - CineApp{% endblock %}
 
 {% block content %}
 <article class="detalle-pelicula">
+    <div class="detalle-cartel">
+        {% if pelicula.cartel %}
+            <img src="{{ pelicula.cartel.url }}" class="cartel-grande" alt="{{ pelicula.titulo }}">
+        {% else %}
+            <div class="cartel-grande cartel-vacio">🎞️</div>
+        {% endif %}
+    </div>
+
     <div class="detalle-info">
         <h1 class="detalle-titulo">{{ pelicula.titulo }}</h1>
 

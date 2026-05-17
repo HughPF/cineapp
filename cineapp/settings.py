@@ -1,8 +1,10 @@
 """
 Django settings for cineapp project.
+Catálogo de Películas - PEP Prueba de Evaluación 2 - Parte 2
 """
 
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -10,7 +12,7 @@ SECRET_KEY = 'django-insecure-k5&c@!101f532t8^&o*()g%t!$bwefh@lwv7__0s^!$f+m%rat
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -78,6 +80,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

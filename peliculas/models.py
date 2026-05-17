@@ -24,6 +24,9 @@ class Pelicula(models.Model):
     duracion = models.PositiveIntegerField(
         verbose_name='Duración (minutos)', default=90
     )
+    cartel = models.ImageField(
+        upload_to='carteles/', blank=True, null=True, verbose_name='Cartel'
+    )
     genero = models.ForeignKey(
         Genero, on_delete=models.SET_NULL, null=True, blank=True,
         related_name='peliculas', verbose_name='Género'

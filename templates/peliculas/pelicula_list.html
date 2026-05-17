@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Catálogo - CineApp{% endblock %}
 
@@ -38,6 +39,11 @@
 <div class="parrilla-peliculas">
     {% for pelicula in peliculas %}
     <article class="tarjeta-pelicula">
+        {% if pelicula.cartel %}
+            <img src="{{ pelicula.cartel.url }}" class="cartel" alt="{{ pelicula.titulo }}">
+        {% else %}
+            <div class="cartel cartel-vacio">🎞️</div>
+        {% endif %}
         <div class="tarjeta-cuerpo">
             <h3 class="tarjeta-titulo">{{ pelicula.titulo }}</h3>
             <p class="tarjeta-meta">
