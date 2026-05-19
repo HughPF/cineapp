@@ -6,6 +6,18 @@ Aplicación web desarrollada con **Django 5** para la gestión colaborativa de u
 
 ---
 
+## 🌐 Demo en línea
+
+🔗 **https://hugoperezfermoso.pythonanywhere.com/**
+
+| Usuario | Contraseña |
+|---------|------------|
+| `admin` | `admin1234` |
+| `alvaro` | `cineapp123` |
+| `maria` | `cineapp123` |
+
+---
+
 ## 📋 Tabla de contenidos
 
 1. [Características](#-características)
